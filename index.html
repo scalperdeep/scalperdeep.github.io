@@ -1,20 +1,2206 @@
+```html
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ScalperDeep</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="ScalperDeep - Herramientas profesionales para trading.">
+          content="ScalperDeep — Advanced market data, analytics and trading tools for serious traders.">
+
+    <meta name="keywords"
+          content="ScalperDeep, trading, market data, order flow, futures, analytics">
+
+    <meta name="author"
+          content="ScalperDeep">
+
+    <meta name="theme-color"
+          content="#05070a">
+
+    <title>ScalperDeep — Trade With Precision</title>
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #05070a;
+            color: #f4f7fb;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(0, 255, 170, 0.08),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 85% 25%,
+                    rgba(0, 150, 255, 0.07),
+                    transparent 30%
+                );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(5, 7, 10, 0.78);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00ffb3,
+                    #00aaff
+                );
+
+            position: relative;
+
+            box-shadow:
+                0 0 25px rgba(0,255,180,0.25);
+        }
+
+        .logo-mark::after {
+            content: "";
+
+            position: absolute;
+
+            width: 13px;
+            height: 13px;
+
+            border-right: 3px solid #05070a;
+            border-top: 3px solid #05070a;
+
+            transform: rotate(45deg);
+
+            left: 7px;
+            top: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+
+            font-size: 14px;
+            color: #9da7b5;
+        }
+
+        .nav-links a {
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-btn {
+            color: #b8c0cc;
+            font-size: 14px;
+            padding: 10px 14px;
+        }
+
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 20px;
+
+            border-radius: 9px;
+
+            border: 1px solid rgba(0,255,180,0.35);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d99a,
+                    #00a9ff
+                );
+
+            color: #04100d;
+
+            font-size: 14px;
+            font-weight: 750;
+
+            box-shadow:
+                0 8px 30px rgba(0,220,160,0.15);
+
+            transition: 0.25s ease;
+
+            cursor: pointer;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 35px rgba(0,220,160,0.25);
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding:
+                150px 20px
+                100px;
+
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            border: 1px solid rgba(0,255,180,0.18);
+
+            background:
+                rgba(0,255,180,0.04);
+
+            color: #9eeed7;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 27px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #00e6a0;
+
+            box-shadow:
+                0 0 10px #00e6a0;
+        }
+
+        .hero h1 {
+            font-size: clamp(52px, 8vw, 105px);
+
+            line-height: 0.98;
+
+            letter-spacing: -5px;
+
+            font-weight: 850;
+
+            margin-bottom: 30px;
+        }
+
+        .gradient-text {
+            background:
+                linear-gradient(
+                    100deg,
+                    #ffffff 15%,
+                    #9df5da 50%,
+                    #66c8ff 90%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            margin: auto;
+
+            color: #8e99a8;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 21px;
+
+            border-radius: 9px;
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            background: rgba(255,255,255,0.025);
+
+            color: #dbe2eb;
+
+            font-size: 14px;
+            font-weight: 650;
+
+            transition: 0.25s ease;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        /* =========================================================
+           MARKET TICKER
+        ========================================================= */
+
+        .ticker {
+            width: 100%;
+
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.015);
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 65px;
+
+            width: max-content;
+
+            padding: 17px 0;
+
+            animation:
+                tickerMove 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            color: #8e99a8;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .ticker-price {
+            color: #dce4ec;
+        }
+
+        .up {
+            color: #00dfa1;
+        }
+
+        .down {
+            color: #ff6675;
+        }
+
+        @keyframes tickerMove {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+
+        }
+
+        /* =========================================================
+           GENERAL SECTIONS
+        ========================================================= */
+
+        section {
+            padding: 120px 7%;
+        }
+
+        .section-label {
+            color: #00dba0;
+
+            font-size: 12px;
+            font-weight: 750;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 13px;
+        }
+
+        .section-title {
+            max-width: 720px;
+
+            font-size: clamp(34px, 5vw, 58px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            max-width: 650px;
+
+            color: #8e99a8;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            margin-bottom: 55px;
+        }
+
+        /* =========================================================
+           FEATURES
+        ========================================================= */
+
+        .features-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 17px;
+        }
+
+        .feature-card {
+            min-height: 250px;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.035),
+                    rgba(255,255,255,0.012)
+                );
+
+            transition: 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(0,255,180,0.22);
+
+            background:
+                rgba(0,255,180,0.025);
+        }
+
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                rgba(0,220,170,0.08);
+
+            border:
+                1px solid
+                rgba(0,220,170,0.14);
+
+            font-size: 19px;
+
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #818c9b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           PLATFORM
+        ========================================================= */
+
+        .platform {
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent,
+                    rgba(0,150,255,0.025),
+                    transparent
+                );
+        }
+
+        .platform-box {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 45px;
+
+            align-items: center;
+        }
+
+        .platform-list {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .platform-item {
+            display: flex;
+
+            gap: 17px;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            background:
+                rgba(255,255,255,0.018);
+        }
+
+        .platform-number {
+            color: #00dba0;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            min-width: 25px;
+        }
+
+        .platform-item h4 {
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .platform-item p {
+            color: #7f8a99;
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           TERMINAL MOCKUP
+        ========================================================= */
+
+        .terminal {
+            border-radius: 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.09);
+
+            background: #080c11;
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,0.45);
+
+            overflow: hidden;
+        }
+
+        .terminal-top {
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 0 15px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+        .window-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #414954;
+        }
+
+        .terminal-title {
+            margin-left: 10px;
+
+            font-size: 11px;
+
+            color: #697483;
+        }
+
+        .chart {
+            height: 330px;
+
+            padding: 25px;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                45px 45px;
+        }
+
+        .chart-line {
+            position: absolute;
+
+            left: 8%;
+            right: 7%;
+
+            top: 55%;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00dba0,
+                    #00aaff
+                );
+
+            transform:
+                rotate(-8deg);
+
+            box-shadow:
+                0 0 18px
+                rgba(0,220,170,0.35);
+        }
+
+        .chart-line::before {
+            content: "";
+
+            position: absolute;
+
+            width: 100%;
+            height: 80px;
+
+            top: -80px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    transparent 49%,
+                    rgba(0,220,170,0.25) 50%,
+                    transparent 51%
+                );
+        }
+
+        .terminal-data {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+        .data-box {
+            padding: 17px;
+
+            border-right:
+                1px solid
+                rgba(255,255,255,0.06);
+        }
+
+        .data-box span {
+            display: block;
+
+            color: #697483;
+
+            font-size: 10px;
+
+            margin-bottom: 5px;
+        }
+
+        .data-box strong {
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           PRICING
+        ========================================================= */
+
+        .pricing {
+            text-align: center;
+        }
+
+        .pricing .section-description {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 17px;
+
+            text-align: left;
+        }
+
+        .price-card {
+            padding: 32px;
+
+            border-radius: 17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            background:
+                rgba(255,255,255,0.018);
+
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color:
+                rgba(0,220,170,0.35);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0,220,170,0.07),
+                    rgba(0,120,255,0.025)
+                );
+
+            transform: translateY(-7px);
+        }
+
+        .popular {
+            position: absolute;
+
+            top: 16px;
+            right: 16px;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            color: #06100c;
+
+            background: #00dba0;
+        }
+
+        .price-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 8px;
+        }
+
+        .price-card .price {
+            font-size: 39px;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            margin: 15px 0;
+        }
+
+        .price-card .price span {
+            color: #707b89;
+
+            font-size: 13px;
+
+            font-weight: 400;
+
+            letter-spacing: 0;
+        }
+
+        .price-card p {
+            color: #818c9b;
+
+            font-size: 13px;
+
+            min-height: 45px;
+
+            margin-bottom: 25px;
+        }
+
+        .price-features {
+            list-style: none;
+
+            margin-bottom: 28px;
+        }
+
+        .price-features li {
+            color: #a5afbc;
+
+            font-size: 13px;
+
+            margin-bottom: 11px;
+        }
+
+        .price-features li::before {
+            content: "✓";
+
+            color: #00dba0;
+
+            margin-right: 9px;
+
+            font-weight: 800;
+        }
+
+        .price-button {
+            width: 100%;
+
+            text-align: center;
+        }
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            padding-top: 50px;
+            padding-bottom: 130px;
+        }
+
+        .cta-box {
+            text-align: center;
+
+            padding:
+                90px 25px;
+
+            border-radius: 22px;
+
+            border:
+                1px solid
+                rgba(0,220,170,0.13);
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0,220,170,0.08),
+                    rgba(255,255,255,0.015) 50%,
+                    transparent 75%
+                );
+        }
+
+        .cta-box h2 {
+            font-size: clamp(35px, 5vw, 60px);
+
+            letter-spacing: -2.5px;
+
+            margin-bottom: 18px;
+        }
+
+        .cta-box p {
+            color: #818c9b;
+
+            max-width: 550px;
+
+            margin:
+                0 auto 28px;
+        }
+
+        /* =========================================================
+           FAQ
+        ========================================================= */
+
+        .faq {
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        .faq-item {
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.07);
+        }
+
+        .faq-question {
+            width: 100%;
+
+            padding: 22px 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            background: transparent;
+
+            border: none;
+
+            color: #e5eaf0;
+
+            text-align: left;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            max-height: 0;
+
+            overflow: hidden;
+
+            color: #7f8997;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+
+            transition:
+                max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 20px;
+        }
+
+        .faq-item.active
+        .faq-answer {
+            max-height: 200px;
+        }
+
+        .plus {
+            font-size: 20px;
+
+            color: #65707e;
+
+            transition: 0.25s;
+        }
+
+        .faq-item.active
+        .plus {
+            transform: rotate(45deg);
+            color: #00dba0;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            padding:
+                45px 7%;
+
+            color: #65707e;
+
+            font-size: 12px;
+        }
+
+        .footer-content {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-links a:hover {
+            color: #cbd3dd;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        .mobile-menu {
+            display: none;
+
+            font-size: 25px;
+
+            cursor: pointer;
+
+            color: #dfe6ee;
+        }
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-actions .login-btn {
+                display: none;
+            }
+
+            .features-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-box {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: none;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .hero {
+                padding-top: 130px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            section {
+                padding:
+                    85px 5%;
+            }
+
+            .section-title {
+                letter-spacing: -1.5px;
+            }
+
+            .terminal-data {
+                grid-template-columns: 1fr;
+            }
+
+            .data-box {
+                border-right: none;
+
+                border-bottom:
+                    1px solid
+                    rgba(255,255,255,0.06);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
-    <h1>ScalperDeep</h1>
+<!-- =============================================================
+     NAVIGATION
+============================================================= -->
 
-    <p>Bienvenido a ScalperDeep.</p>
+<nav>
+
+    <a href="#" class="logo">
+
+        <div class="logo-mark"></div>
+
+        <span>ScalperDeep</span>
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="#platform">Platform</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#pricing">Pricing</a>
+
+        <a href="#faq">FAQ</a>
+
+    </div>
+
+    <div class="nav-actions">
+
+        <a href="#" class="login-btn">
+            Login
+        </a>
+
+        <a href="#pricing"
+           class="primary-btn">
+
+            Get Started
+
+        </a>
+
+        <div class="mobile-menu"
+             onclick="toggleMobileMenu()">
+
+            ☰
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =============================================================
+     HERO
+============================================================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            MARKET INTELLIGENCE PLATFORM
+
+        </div>
+
+        <h1>
+
+            <span class="gradient-text">
+                Trade With
+            </span>
+
+            <br>
+
+            Precision.
+
+        </h1>
+
+        <p>
+
+            ScalperDeep brings market data, order flow,
+            analytics and advanced trading tools into
+            one professional platform built for traders
+            who demand more from their data.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#pricing"
+               class="primary-btn">
+
+                Start Trading →
+
+            </a>
+
+            <a href="#platform"
+               class="secondary-btn">
+
+                Explore Platform
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =============================================================
+     TICKER
+============================================================= -->
+
+<div class="ticker">
+
+    <div class="ticker-track">
+
+        <div class="ticker-item">
+            XAUUSD
+            <span class="ticker-price">
+                2,653.40
+            </span>
+            <span class="up">+0.82%</span>
+        </div>
+
+        <div class="ticker-item">
+            GC
+            <span class="ticker-price">
+                2,658.10
+            </span>
+            <span class="up">+0.71%</span>
+        </div>
+
+        <div class="ticker-item">
+            NQ
+            <span class="ticker-price">
+                21,845.25
+            </span>
+            <span class="up">+0.42%</span>
+        </div>
+
+        <div class="ticker-item">
+            ES
+            <span class="ticker-price">
+                5,742.75
+            </span>
+            <span class="down">-0.18%</span>
+        </div>
+
+        <div class="ticker-item">
+            DXY
+            <span class="ticker-price">
+                101.24
+            </span>
+            <span class="down">-0.24%</span>
+        </div>
+
+        <!-- DUPLICATE FOR ANIMATION -->
+
+        <div class="ticker-item">
+            XAUUSD
+            <span class="ticker-price">
+                2,653.40
+            </span>
+            <span class="up">+0.82%</span>
+        </div>
+
+        <div class="ticker-item">
+            GC
+            <span class="ticker-price">
+                2,658.10
+            </span>
+            <span class="up">+0.71%</span>
+        </div>
+
+        <div class="ticker-item">
+            NQ
+            <span class="ticker-price">
+                21,845.25
+            </span>
+            <span class="up">+0.42%</span>
+        </div>
+
+        <div class="ticker-item">
+            ES
+            <span class="ticker-price">
+                5,742.75
+            </span>
+            <span class="down">-0.18%</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =============================================================
+     FEATURES
+============================================================= -->
+
+<section id="features">
+
+    <div class="section-label">
+        Core Technology
+    </div>
+
+    <h2 class="section-title">
+        See the market differently.
+    </h2>
+
+    <p class="section-description">
+
+        ScalperDeep is designed around the information
+        traders actually need. From market depth to
+        real-time analytics, turn raw market data into
+        actionable information.
+
+    </p>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Real-Time Data
+            </h3>
+
+            <p>
+                Access fast market data designed for
+                professional trading workflows and
+                real-time decision making.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ◈
+            </div>
+
+            <h3>
+                Order Flow
+            </h3>
+
+            <p>
+                Analyze liquidity, trades and market
+                activity to understand what is happening
+                beneath the price.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ◫
+            </div>
+
+            <h3>
+                Market Depth
+            </h3>
+
+            <p>
+                Visualize available liquidity and
+                market depth with tools designed for
+                detailed analysis.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ◒
+            </div>
+
+            <h3>
+                Advanced Analytics
+            </h3>
+
+            <p>
+                Transform complex market information
+                into clear analytical signals and
+                structured insights.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⌁
+            </div>
+
+            <h3>
+                Multi-Market
+            </h3>
+
+            <p>
+                Build a unified workflow across futures,
+                commodities, indices and other supported
+                markets.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ◆
+            </div>
+
+            <h3>
+                Built For Traders
+            </h3>
+
+            <p>
+                A focused interface designed to keep
+                important information visible without
+                unnecessary complexity.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     PLATFORM
+============================================================= -->
+
+<section id="platform"
+         class="platform">
+
+    <div class="platform-box">
+
+        <div>
+
+            <div class="section-label">
+                The Platform
+            </div>
+
+            <h2 class="section-title">
+                From raw data to market intelligence.
+            </h2>
+
+            <p class="section-description">
+
+                ScalperDeep combines data feeds,
+                analytics and visualization into a
+                single trading environment.
+
+            </p>
+
+
+            <div class="platform-list">
+
+                <div class="platform-item">
+
+                    <div class="platform-number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Data Collection
+                        </h4>
+
+                        <p>
+                            Connect supported market
+                            data sources.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="platform-item">
+
+                    <div class="platform-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Market Processing
+                        </h4>
+
+                        <p>
+                            Process market activity
+                            in real time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="platform-item">
+
+                    <div class="platform-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Analytics
+                        </h4>
+
+                        <p>
+                            Convert market activity
+                            into useful analytics.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="platform-item">
+
+                    <div class="platform-number">
+                        04
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Visualization
+                        </h4>
+
+                        <p>
+                            Present the information
+                            clearly to the trader.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TERMINAL -->
+
+        <div class="terminal">
+
+            <div class="terminal-top">
+
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+
+                <span class="terminal-title">
+                    ScalperDeep Market Terminal
+                </span>
+
+            </div>
+
+
+            <div class="chart">
+
+                <div class="chart-line"></div>
+
+            </div>
+
+
+            <div class="terminal-data">
+
+                <div class="data-box">
+
+                    <span>
+                        LAST
+                    </span>
+
+                    <strong>
+                        2,653.40
+                    </strong>
+
+                </div>
+
+                <div class="data-box">
+
+                    <span>
+                        DELTA
+                    </span>
+
+                    <strong class="up">
+                        +12.8K
+                    </strong>
+
+                </div>
+
+                <div class="data-box">
+
+                    <span>
+                        VOLUME
+                    </span>
+
+                    <strong>
+                        184.2K
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     PRICING
+============================================================= -->
+
+<section id="pricing"
+         class="pricing">
+
+    <div class="section-label">
+        Pricing
+    </div>
+
+    <h2 class="section-title"
+        style="margin-left:auto;margin-right:auto;">
+
+        Choose your level.
+
+    </h2>
+
+    <p class="section-description">
+
+        Start with the tools you need and scale
+        your access as your trading workflow grows.
+
+    </p>
+
+
+    <div class="pricing-grid">
+
+
+        <!-- FREE -->
+
+        <div class="price-card">
+
+            <h3>
+                Free
+            </h3>
+
+            <div class="price">
+                $0
+                <span>
+                    / month
+                </span>
+            </div>
+
+            <p>
+                Explore the ScalperDeep ecosystem.
+            </p>
+
+            <ul class="price-features">
+
+                <li>
+                    Basic platform access
+                </li>
+
+                <li>
+                    Market overview
+                </li>
+
+                <li>
+                    Basic analytics
+                </li>
+
+                <li>
+                    Community access
+                </li>
+
+            </ul>
+
+            <a href="#"
+               class="secondary-btn price-button">
+
+                Get Started
+
+            </a>
+
+        </div>
+
+
+        <!-- PRO -->
+
+        <div class="price-card featured">
+
+            <div class="popular">
+                POPULAR
+            </div>
+
+            <h3>
+                Pro
+            </h3>
+
+            <div class="price">
+                $29
+                <span>
+                    / month
+                </span>
+            </div>
+
+            <p>
+                Advanced tools for active traders.
+            </p>
+
+            <ul class="price-features">
+
+                <li>
+                    Real-time market data
+                </li>
+
+                <li>
+                    Order flow analytics
+                </li>
+
+                <li>
+                    Market depth
+                </li>
+
+                <li>
+                    Advanced tools
+                </li>
+
+                <li>
+                    Multi-market support
+                </li>
+
+            </ul>
+
+            <a href="#"
+               class="primary-btn price-button">
+
+                Start Pro
+
+            </a>
+
+        </div>
+
+
+        <!-- ELITE -->
+
+        <div class="price-card">
+
+            <h3>
+                Elite
+            </h3>
+
+            <div class="price">
+                $79
+                <span>
+                    / month
+                </span>
+            </div>
+
+            <p>
+                Maximum analytical capabilities.
+            </p>
+
+            <ul class="price-features">
+
+                <li>
+                    Everything in Pro
+                </li>
+
+                <li>
+                    Advanced market analytics
+                </li>
+
+                <li>
+                    Extended data access
+                </li>
+
+                <li>
+                    Professional features
+                </li>
+
+                <li>
+                    Priority support
+                </li>
+
+            </ul>
+
+            <a href="#"
+               class="secondary-btn price-button">
+
+                Contact Sales
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     FAQ
+============================================================= -->
+
+<section id="faq">
+
+    <div class="section-label">
+        FAQ
+    </div>
+
+    <h2 class="section-title">
+        Frequently asked questions.
+    </h2>
+
+    <div class="faq">
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                What is ScalperDeep?
+
+                <span class="plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    ScalperDeep is a market intelligence
+                    platform focused on market data,
+                    analytics and tools for traders.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Which markets are supported?
+
+                <span class="plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    ScalperDeep is being designed to
+                    support multiple markets including
+                    futures, commodities and indices.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Can I use ScalperDeep from my computer?
+
+                <span class="plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    Yes. The platform is designed with
+                    desktop trading workflows in mind.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+            <button class="faq-question">
+
+                Is ScalperDeep free?
+
+                <span class="plus">
+                    +
+                </span>
+
+            </button>
+
+            <div class="faq-answer">
+
+                <p>
+                    ScalperDeep can offer different
+                    access levels depending on the
+                    selected plan.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     CTA
+============================================================= -->
+
+<section class="cta">
+
+    <div class="cta-box">
+
+        <div class="section-label">
+            Start Your Journey
+        </div>
+
+        <h2>
+            Trade with better information.
+        </h2>
+
+        <p>
+
+            Build your trading workflow around
+            data, analytics and precision.
+
+        </p>
+
+        <a href="#pricing"
+           class="primary-btn">
+
+            Explore ScalperDeep →
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =============================================================
+     FOOTER
+============================================================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            © 2026 ScalperDeep.
+            All rights reserved.
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <a href="#">
+                Terms
+            </a>
+
+            <a href="#faq">
+                Support
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =============================================================
+     JAVASCRIPT
+============================================================= -->
+
+<script>
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
+
+    const faqItems =
+        document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+
+        const question =
+            item.querySelector(".faq-question");
+
+        question.addEventListener("click", () => {
+
+            faqItems.forEach(other => {
+
+                if (other !== item) {
+
+                    other.classList.remove("active");
+
+                }
+
+            });
+
+            item.classList.toggle("active");
+
+        });
+
+    });
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    function toggleMobileMenu() {
+
+        const links =
+            document.querySelector(".nav-links");
+
+        if (links.style.display === "flex") {
+
+            links.style.display = "none";
+
+        } else {
+
+            links.style.display = "flex";
+
+            links.style.position = "absolute";
+
+            links.style.top = "76px";
+
+            links.style.left = "0";
+
+            links.style.right = "0";
+
+            links.style.padding = "25px";
+
+            links.style.flexDirection = "column";
+
+            links.style.background = "#080b10";
+
+            links.style.borderBottom =
+                "1px solid rgba(255,255,255,0.06)";
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    const observer =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.12
+            }
+
+        );
+
+
+    document
+        .querySelectorAll(
+            ".feature-card, .platform-item, .price-card"
+        )
+        .forEach(element => {
+
+            element.style.opacity = "0";
+
+            element.style.transform =
+                "translateY(20px)";
+
+            element.style.transition =
+                "opacity .6s ease, transform .6s ease";
+
+            observer.observe(element);
+
+        });
+
+</script>
 
 </body>
 </html>
+```
